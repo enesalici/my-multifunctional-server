@@ -1,4 +1,1 @@
-degisiklik
-degisiklik2
-degisiklik3
-degisiklik4
+1
