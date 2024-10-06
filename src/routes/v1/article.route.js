@@ -6,13 +6,15 @@ const articleValidation = require('../../validations/article.validation');
 
 const router = express.Router();
 
-router.route('/')
-.post(validate(articleValidation.createArticle), articleController.createArticle)
-.get(articleController.getArticles);
+router
+  .route('/')
+  .post(auth('user'), validate(articleValidation.createArticle), articleController.createArticle)
+  .get(auth('user'), validate(articleValidation.getArticles), articleController.getArticles);
 
-router.route('/:articleId')
-.get(articleController.getArticleById)
-.patch(articleController.updateArticleById)
-.delete(articleController.deleteArticleById);
+router
+  .route('/:articleId')
+  .get(auth('user'), validate(articleValidation.getArticleById), articleController.getArticleById)
+  .patch(auth('user'), validate(articleValidation.updateArticleById), articleController.updateArticleById)
+  .delete(auth('user'), validate(articleValidation.deleteArticleById), articleController.deleteArticleById);
 
 module.exports = router;
