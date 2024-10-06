@@ -6,7 +6,9 @@ const getArticleById = async (id) => {
   return Article.findById(id);
 };
 
-const queryArticles = async (filter, options) => {
+const queryArticles = async (userId, filter, options) => {
+  
+  filter.userId = userId;
   const articles = await Article.paginate(filter, options);
   return articles;
 };
